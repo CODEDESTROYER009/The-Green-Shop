@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: ["the-green-shop.onrender.com"], // 👈 Add this line
   },
   plugins: [react()],
   resolve: {
@@ -15,3 +16,4 @@ export default defineConfig({
     },
   },
 });
+
