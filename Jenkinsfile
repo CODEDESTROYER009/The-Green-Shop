@@ -2,6 +2,10 @@
 pipeline {
     agent any
 
+    triggers {
+    pollSCM('H/2 * * * *')  // checks every 2 minutes for new commits on GitHub
+    }
+
     environment {
         CI = 'true'
         NODE_ENV = 'production'
