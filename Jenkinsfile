@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         CI = 'true'
-        NODE_ENV = 'production'
+        NODE_ENV = 'development'
         VITE_SUPABASE_URL = credentials('SUPABASE_URL')
         VITE_SUPABASE_PUBLISHABLE_KEY = credentials('SUPABASE_KEY')
     }
@@ -26,7 +26,7 @@ pipeline {
                 echo "📥 Installing dependencies..."
                 sh '''
                     rm -rf node_modules package-lock.json
-                    npm install
+                    npm install --include=dev
                 '''
             }
         }
