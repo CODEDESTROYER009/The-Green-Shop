@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'npm vite build'
                 archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
             }
         }
