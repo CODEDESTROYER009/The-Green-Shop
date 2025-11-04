@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Verify vite version instead of checking old path
                 sh 'npx vite --version'
-                sh 'npm run build'
+                sh 'npx vite build'
                 archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
             }
         }
