@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         CI = 'true'
-        NODE_ENV = 'production'
+        NODE_ENV = 'development'
         VITE_SUPABASE_URL = credentials('SUPABASE_URL')
         VITE_SUPABASE_PUBLISHABLE_KEY = credentials('SUPABASE_KEY')
     }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Clean old installs to avoid cache issues
                 sh 'rm -rf node_modules package-lock.json'
-                sh 'npm install'
+                sh 'npm install --inculde=dev'
             }
         }
 
