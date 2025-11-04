@@ -42,9 +42,8 @@ pipeline {
         }
 
         stage('Deploy to Render') {
-            when { 
-                branch 'main'
-                beforeAgent true
+            when {
+                expression { env.BRANCH_NAME == 'main' }
             }
             steps {
                 echo "🚀 Starting Render deployment..."
