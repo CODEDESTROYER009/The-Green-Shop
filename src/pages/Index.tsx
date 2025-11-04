@@ -116,7 +116,7 @@ const Index = () => {
               Save the Planet
             </h1>
             <p className="text-xl mb-8 text-white/90">
-              Every purchase reduces carbon footprint. Earn green points and track your environmental impact.
+              Friday hai Pancho 
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/products">
