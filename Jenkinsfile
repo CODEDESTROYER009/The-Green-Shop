@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     triggers {
-    pollSCM('H/2 * * * *')  // checks every 2 minutes for new commits on GitHub
+        pollSCM('H/2 * * * *')  // checks every 2 minutes for new commits on GitHub
     }
 
     environment {
@@ -26,7 +26,7 @@ pipeline {
                 echo "📥 Installing dependencies..."
                 sh '''
                     rm -rf node_modules package-lock.json
-                    npm ci
+                    npm install
                 '''
             }
         }
