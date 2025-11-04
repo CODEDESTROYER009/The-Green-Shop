@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 142 71% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 142 71% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 142 71% 15%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 142 30% 95%;
+    --secondary-foreground: 142 71% 15%;
+
+    --muted: 142 20% 96%;
+    --muted-foreground: 142 10% 45%;
+
+    --accent: 88 50% 53%;
+    --accent-foreground: 142 71% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 142 20% 90%;
+    --input: 142 20% 90%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.75rem;
+
+    /* Eco-specific colors */
+    --eco-verified: 142 76% 36%;
+    --eco-badge: 88 50% 53%;
+    --earth-tone: 32 45% 60%;
+    --ocean-blue: 200 70% 50%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(88 50% 53%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(142 30% 98%) 100%);
+    --gradient-eco: linear-gradient(90deg, hsl(142 76% 36%) 0%, hsl(120 60% 45%) 100%);
+
+    /* Shadows */
+    --shadow-eco: 0 10px 30px -10px hsl(142 76% 36% / 0.3);
+    --shadow-card: 0 4px 20px hsl(142 20% 50% / 0.1);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 142 50% 5%;
+    --foreground: 142 20% 95%;
+
+    --card: 142 45% 8%;
+    --card-foreground: 142 20% 95%;
+
+    --popover: 142 45% 8%;
+    --popover-foreground: 142 20% 95%;
+
+    --primary: 142 76% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 142 40% 15%;
+    --secondary-foreground: 142 20% 95%;
+
+    --muted: 142 30% 15%;
+    --muted-foreground: 142 20% 65%;
+
+    --accent: 88 50% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 142 30% 20%;
+    --input: 142 30% 20%;
+    --ring: 142 76% 45%;
+
+    --eco-verified: 142 76% 45%;
+    --eco-badge: 88 50% 60%;
+    --earth-tone: 32 45% 55%;
+    --ocean-blue: 200 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
