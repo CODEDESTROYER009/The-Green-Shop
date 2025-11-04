@@ -42,15 +42,48 @@ pipeline {
         }
 
         stage('Deploy to Render') {
-            when { branch 'main' }
+            when { 
+                branch 'main'
+                beforeAgent true
+            }
             steps {
-                echo "🚀 Triggering Render deployment..."
-                withCredentials([string(credentialsId: 'RENDER_DEPLOY_KEY', variable: 'RENDER_DEPLOY_KEY')]) {
+                echo "🚀 Starting Render deployment..."
+                withCredentials([string(credentialsId: 'RENDER_DEPLOY_KEY', variable: 'RENDER_API_KEY')]) {
                     script {
-                        def serviceId = "srv-d455f3ali9vc73cgh4bg"  // replace with your actual Render service ID
-                        def deployUrl = "https://api.render.com/deploy/${serviceId}?key=${RENDER_DEPLOY_KEY}"
-                        sh "curl -X POST '${deployUrl}'"
-                        echo "✅ Render deployment triggered successfully."
+                        // Verify the service ID is correct
+                        def serviceId = "srv-d455f3ali9vc73cgh4bg"  // Double-check this ID in your Render dashboard
+                        def deployUrl = "https://api.render.com/v1/services/${serviceId}/deploys"
+                        
+                        echo "🔑 Using Render service ID: ${serviceId}"
+                        
+                        // Install curl if not already installed
+                        sh 'command -v curl || (echo "curl not found, installing..." && apt-get update && apt-get install -y curl)'
+                        
+                        // Make the API request with proper headers and error handling
+                        def response = sh(
+                            script: """
+                                curl -s -o response.txt -w '%{http_code}' -X POST \
+                                -H "Authorization: Bearer ${RENDER_API_KEY}" \
+                                -H "Accept: application/json" \
+                                -H "Content-Type: application/json" \
+                                "${deployUrl}"
+                            """,
+                            returnStdout: true
+                        ).trim()
+                        
+                        // Get the response content
+                        def responseCode = response.tokenize('\n').last()
+                        def responseContent = sh(script: 'cat response.txt', returnStdout: true).trim()
+                        
+                        echo "📡 API Response Code: ${responseCode}"
+                        echo "📄 API Response: ${responseContent}"
+                        
+                        if (responseCode != '201') {
+                            error("❌ Failed to trigger Render deployment. Status: ${responseCode}")
+                        } else {
+                            echo "✅ Successfully triggered Render deployment"
+                            echo "🔗 Check deployment status at: https://dashboard.render.com/static/srv/${serviceId}"
+                        }
                     }
                 }
             }
