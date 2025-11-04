@@ -42,9 +42,9 @@ pipeline {
         }
 
         stage('Deploy to Render') {
-            when {
-                expression { env.BRANCH_NAME == 'main' }
-            }
+            //when {
+              //  expression { env.BRANCH_NAME == 'main' }
+            //}
             steps {
                 echo "🚀 Starting Render deployment..."
                 withCredentials([string(credentialsId: 'RENDER_DEPLOY_KEY', variable: 'RENDER_API_KEY')]) {
