@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -7,7 +8,7 @@ export default defineConfig({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["the-green-shop.onrender.com"], // 👈 Add this line
+    allowedHosts: ["the-green-shop.onrender.com"],
   },
   plugins: [react()],
   resolve: {
@@ -16,4 +17,3 @@ export default defineConfig({
     },
   },
 });
-
