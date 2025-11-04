@@ -1,9 +1,7 @@
-
-const { defineConfig } = require("vite");
 const react = require("@vitejs/plugin-react-swc");
 const path = require("path");
 
-module.exports = defineConfig({
+module.exports = {
   server: {
     host: "::",
     port: 8080,
@@ -15,4 +13,4 @@ module.exports = defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+};
