@@ -24,6 +24,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                sh 'ls -l node_modules/vite/bin/vite.js'                
                 sh 'npx vite build'
                 archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
             }
