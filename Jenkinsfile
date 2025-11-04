@@ -18,14 +18,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                // Clean old installs to avoid cache issues
+                sh 'rm -rf node_modules package-lock.json'
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'ls -l node_modules/vite/bin/vite.js'                
-                sh 'npx vite build'
+                // Verify vite version instead of checking old path
+                sh 'npx vite --version'
+                sh 'npm run build'
                 archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
             }
         }
@@ -40,7 +43,7 @@ pipeline {
                     script {
                         def deployUrl = env.RENDER_DEPLOY_HOOK.replace('${RENDER_DEPLOY_KEY}', RENDER_DEPLOY_KEY)
                         sh "curl -X POST '${deployUrl}'"
-                        echo "Deployment triggered successfully"
+                        echo "✅ Deployment triggered successfully"
                     }
                 }
             }
